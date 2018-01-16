@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import object_detection_api
 import os
 from PIL import Image
