@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#fff">
+    <title>NextDoor Object Detection from getUserMedia</title>
+
+    <style>
+        video {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            z-index: -1;
+            /* Mirror the local video */
+            transform: scale(-1, 1);            /*For Firefox (& IE) */
+            -webkit-transform: scale(-1, 1);     /*for Chrome & Opera (& Safari) */
+        }
+        canvas{
+            position: absolute;
+            top: 100px;
+            left: 0;
+            z-index:1
+        }
+    </style>
+</head>
+<body>
+  <div class="select">
+    <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+  </div>
+
+  <div class="select">
+    <label for="videoSource">Video source: </label><select id="videoSource"></select>
+  </div>
+  
+<video id="myVideo" autoplay></video>
+<script src="/static/common/adapter-latest.js"></script>
+<script src="/static/local.js"></script>
+<script id="objDetect" src="/static/objDetectOnMotion.js" data-source="myVideo" data-mirror="true" data-uploadWidth="1280" data-scoreThreshold="0.40"></script>
+</body>
+</html>
