@@ -21,17 +21,17 @@ def after_request(response):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return Response(open('./templates/index.html', encoding='UTF8').read(), mimetype="text/html")
+    return Response(open('./templates/index.html', encoding='UTF-8').read(), mimetype="text/html")
 
 
 @app.route('/cam', methods=['GET','POST'])
 def local():
-    return Response(open('./static/cam.html', encoding='UTF8').read(), mimetype="text/html")
+    return Response(open('./static/cam.html', encoding='UTF-8').read(), mimetype="text/html")
 
 
 @app.route('/video', methods=['GET','POST'])
 def remote():
-    return Response(open('./templates/video.html', encoding='UTF8').read(), mimetype="text/html")
+    return Response(open('./templates/video.html', encoding='UTF-8').read(), mimetype="text/html")
 
 
 @app.route('/test', methods=['GET','POST'])
