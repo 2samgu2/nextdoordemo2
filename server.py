@@ -4,6 +4,7 @@ import os
 import ssl
 from PIL import Image
 from flask import Flask, request, Response
+from flask import render_template
 from flask_sslify import SSLify
 
 app = Flask(__name__)
@@ -21,17 +22,20 @@ def after_request(response):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return Response(open('./templates/index.html', encoding='UTF-8').read(), mimetype="text/html")
+    return render_template('index.html', name='index')
+#    return Response(open('./templates/index.html', encoding='UTF-8').read(), mimetype="text/html")
 
 
 @app.route('/cam', methods=['GET','POST'])
 def local():
-    return Response(open('./static/cam.html', encoding='UTF-8').read(), mimetype="text/html")
+    return render_template('cam.html', name='cam')
+#    return Response(open('./static/cam.html', encoding='UTF-8').read(), mimetype="text/html")
 
 
 @app.route('/video', methods=['GET','POST'])
 def remote():
-    return Response(open('./templates/video.html', encoding='UTF-8').read(), mimetype="text/html")
+    return render_template('video.html', name='video')
+#    return Response(open('./templates/video.html', encoding='UTF-8').read(), mimetype="text/html")
 
 
 @app.route('/test', methods=['GET','POST'])
