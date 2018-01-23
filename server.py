@@ -21,17 +21,17 @@ def after_request(response):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return Response('NextDoor Object Detection Sample Page')
+    return Response(open('./templates/index.html', encoding='UTF8').read(), mimetype="text/html")
 
 
-@app.route('/local', methods=['GET','POST'])
+@app.route('/cam', methods=['GET','POST'])
 def local():
-    return Response(open('./static/local.html').read(), mimetype="text/html")
+    return Response(open('./static/cam.html', encoding='UTF8').read(), mimetype="text/html")
 
 
 @app.route('/video', methods=['GET','POST'])
 def remote():
-    return Response(open('./static/video.html').read(), mimetype="text/html")
+    return Response(open('./templates/video.html', encoding='UTF8').read(), mimetype="text/html")
 
 
 @app.route('/test', methods=['GET','POST'])
@@ -74,8 +74,8 @@ def image():
 
 if __name__ == '__main__':
 	# without SSL
-    #app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
 
 	# with SSL
     ssl_context = 'adhoc'
-    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)
+    #app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)
