@@ -19,23 +19,21 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,POST') # Put any other methods you need here
     return response
 
-
 @app.route('/', methods=['GET','POST'])
 def index():
     return render_template('index.html', name='index')
-#    return Response(open('./templates/index.html', encoding='UTF-8').read(), mimetype="text/html")
-
 
 @app.route('/cam', methods=['GET','POST'])
-def local():
+def cam():
     return render_template('cam.html', name='cam')
-#    return Response(open('./static/cam.html', encoding='UTF-8').read(), mimetype="text/html")
-
 
 @app.route('/video', methods=['GET','POST'])
-def remote():
+def video():
     return render_template('video.html', name='video')
-#    return Response(open('./templates/video.html', encoding='UTF-8').read(), mimetype="text/html")
+
+@app.route('/image', methods=['GET','POST'])
+def image():
+    return render_template('image.html', name='image')
 
 
 @app.route('/test', methods=['GET','POST'])
@@ -54,8 +52,8 @@ def test():
         print('POST /test error: %e', e)
         return e
 
-@app.route('/image', methods=['GET','POST'])
-def image():
+@app.route('/frame', methods=['GET','POST'])
+def frame():
     try:
         image_file = request.files['image']  # get the image
 
@@ -78,8 +76,8 @@ def image():
 
 if __name__ == '__main__':
 	# without SSL
-    app.run(debug=True, host='0.0.0.0')
+    #app.run(debug=True, host='0.0.0.0')
 
 	# with SSL
     ssl_context = 'adhoc'
-    #app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)
+    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)

@@ -9,11 +9,6 @@ function update(stream) {
         document.getElementById('myVideo').play();
     }
 }
-var data = document.querySelector('p#data');
-
-function plog(message) {
-    data.innerHTML = message + '<br><br>' + data.innerHTML;
-}
 
 function demoPlay(src) {
     var len = src.lastIndexOf('.gif');

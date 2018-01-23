@@ -11,7 +11,7 @@ const uploadWidth = s.getAttribute("data-uploadWidth") || 640; //the width of th
 const mirror = s.getAttribute("data-mirror") || false; //mirror the boundary boxes
 const updateInterval = s.getAttribute("data-updateInterval") || 100; //200//the max rate to upload images
 const scoreThreshold = s.getAttribute("data-scoreThreshold") || 0.5;
-const apiServer = s.getAttribute("data-apiServer") || window.location.origin + '/image'; //the full TensorFlow Object Detection API server url
+const apiServer = s.getAttribute("data-apiServer") || window.location.origin + '/frame'; //the full TensorFlow Object Detection API server url
 const imageChangeThreshold = s.getAttribute("data-motionThreshold") || 0.1; //0.05//how much the image can change before we trigger motion
 
 //for our video selector

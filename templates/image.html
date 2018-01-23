@@ -6,12 +6,10 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>MindTrip Cam Service</title>
+        <title>MindTrip Video Service</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- add -->
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta id="theme-color" name="theme-color" content="#fff">
+        
 
         <!--Google Font link-->
         <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
@@ -82,7 +80,6 @@
 -->
 
                     </div>
-                    <!-- End Header Navigation -->
 
                     <!-- navbar menu -->
                     <div class="collapse navbar-collapse" id="navbar-menu">
@@ -98,41 +95,29 @@
             
 <!-- /////////////////////////////////////////////////////////////////////////// -->
 <!-- /////////////////////////////////////////////////////////////////////////// -->
-<section id="cam" class="home">
+<!--Home Sections-->
+<section id="image" class="home">
     <div class="container">
         <div class="row">
             <div class="main_home">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <div class="select">
-		                    <label for="audioSource"><span class="text-white">Audio source: </span></label><select class="form-control" id="audioSource"></select>
-		                </div>
-		                <div class="select">
-		                    <label for="videoSource"><span class="text-white">Video source: </span></label><select class="form-control" id="videoSource"></select>
-		                </div>
-                    </div>
+					    <label for="inputFile"><span class="text-white">ImageFile input</span></label>
+					    <input type="file" class="form-control-file" accept="image/*" onchange="imgChange();"/>
+				    </div>
                 </div>
-
                 <div class="col-md-6">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <video id="myVideo" src="dd" style="top:0;left:0;width:100%;height:100%;position:absolute;transform:scale(-1,1);-webkit-transform:scale(-1,1);" autoplay></video>
-                        <canvas id="myCanvas" style="top:0;left:0;z-index:-1;width:100%;height:100%;position:absolute;"/>
-                    </div>
+                    <canvas id="myCanvas" style="z-index:-1;width:480px;height:100%;position:absolute;"></canvas>
+                    <img id="myImg" src="">
                 </div>
-                
-                <div class="m-top-20 col-md-12">
+                <div class="m-top-20 col-md-6">
                     <label><span class="text-white">Objects Score</span></label><hr/>
                     <p class="text-white" id="data"></p>
                 </div>
-                
             </div>
         </div>
-    </div>
-</section>
-<script src="/static/js/cam.js"></script>
-<script id="objDetect" src="/static/js/objDetect.js" data-source="myVideo" data-mirror="false" data-uploadWidth="300" data-scoreThreshold="0.40"></script>
-<!-- /////////////////////////////////////////////////////////////////////////// -->
-<!-- /////////////////////////////////////////////////////////////////////////// -->
+    </div><!--End off container -->
+</section> <!--End off Home Sections-->
 
             <!-- scroll up-->
             <div class="scrollup">
@@ -183,6 +168,7 @@
         </div>
 
         <!-- JS includes -->
+        <script id="objDetect" src="/static/js/image.js" data-source="myImg"  data-scoreThreshold="0.40"></script>
         <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="static/js/vendor/bootstrap.min.js"></script>
         <script src="static/js/common/boot/jquery.magnific-popup.js"></script>
@@ -192,5 +178,6 @@
         <script src="static/js/common/boot/bootsnav.js"></script>
         <script src="static/js/common/boot/plugins.js"></script>
         <script src="static/js/common/boot/main.js"></script>
+ 
     </body>
 </html>

@@ -10,7 +10,7 @@ const sourceVideo = s.getAttribute("data-source");  //the source video to use
 const uploadWidth = s.getAttribute("data-uploadWidth") || 640; //the width of the upload file
 const mirror = s.getAttribute("data-mirror") || false; //mirror the boundary boxes
 const scoreThreshold = s.getAttribute("data-scoreThreshold") || 0.5;
-const apiServer = s.getAttribute("data-apiServer") || window.location.origin + '/image'; //the full TensorFlow Object Detection API server url
+const apiServer = s.getAttribute("data-apiServer") || window.location.origin + '/frame'; //the full TensorFlow Object Detection API server url
 
 //Video element selector
 v = document.getElementById(sourceVideo);
@@ -31,6 +31,11 @@ let drawCanvas = document.getElementById('myCanvas');
 //document.body.appendChild(drawCanvas);
 let drawCtx = drawCanvas.getContext("2d");
 
+var data = document.querySelector('p#data');
+function plog(message) {
+    data.innerHTML = message + '<br><br>' + data.innerHTML;
+}
+
 //draw boxes and labels on each detected object
 function drawBoxes(objects) {
 
@@ -45,15 +50,18 @@ function drawBoxes(objects) {
         let width = (object.width * drawCanvas.width) - x;
         let height = (object.height * drawCanvas.height) - y;
 
+        console.log('mirror:',mirror);
         //flip the x axis if local video is mirrored
         if (mirror) {
             x = drawCanvas.width - (x + width)
         }
+/*      
         if (object.class_name == 'person') {
             if (navigator.vibrate) {
                 navigator.vibrate(300); // doesn't seem to work in Chrome or Firefox
             } 
         }
+*/
         plog('Label : ' + object.class_name + ', Score : ' + Math.round(object.score * 100) + '%');
         drawCtx.fillText(object.class_name + " - " + Math.round(object.score * 100) + "%", x + 5, y + 20);
         drawCtx.strokeRect(x, y, width, height);
