@@ -82,5 +82,6 @@ if __name__ == '__main__':
 	# with SSL
     #ssl_context = 'adhoc'
     #app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)
-    context = ('S:/development_environment/dev/설치파일/AWS/server-ssl/future.crt', 'S:/development_environment/dev/설치파일/AWS/server-ssl/future.key')
+    #context = ('S:/development_environment/dev/설치파일/AWS/server-ssl/future.crt', 'S:/development_environment/dev/설치파일/AWS/server-ssl/future.key')
+    context = (os.getcwd()+'/future.crt', os.getcwd()+'/future.key')
     app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=context)
