@@ -50,7 +50,6 @@ function drawBoxes(objects) {
         let width = (object.width * drawCanvas.width) - x;
         let height = (object.height * drawCanvas.height) - y;
 
-        console.log('mirror:',mirror);
         //flip the x axis if local video is mirrored
         if (mirror) {
             x = drawCanvas.width - (x + width)
@@ -89,7 +88,6 @@ function postFile(file) {
             //Save and send the next image
             imageCtx.drawImage(v, 0, 0, v.videoWidth, v.videoHeight, 0, 0, uploadWidth, uploadWidth * (v.videoHeight / v.videoWidth));
             imageCanvas.toBlob(postFile, 'image/jpeg');
-            imageCanvas.setAttribute('style', 'z-index:2;width:480px;position:absolute;');
         }
         else {
             console.error(xhr);

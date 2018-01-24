@@ -101,13 +101,16 @@
         <div class="row">
             <div class="main_home">
                 <div class="col-md-6">
-                    <div class="form-group">
-					    <label for="inputFile"><span class="text-white">ImageFile input</span></label>
-					    <input type="file" class="form-control-file" accept="image/*" onchange="imgChange();"/>
-				    </div>
-                </div>
+	                <div class="fileinput fileinput-new" data-provides="fileinput">
+					    <span class="btn btn-default btn-file">
+					        <span>Choose file</span>
+					        <input type="file" accept="image/*" onchange="imgChange();"/>
+					    </span>
+					    <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
+					</div>
+				</div>
                 <div class="col-md-6">
-                    <canvas id="myCanvas" style="z-index:-1;width:480px;height:100%;position:absolute;"></canvas>
+                    <canvas id="myCanvas" style="z-index:-1;width:100%;position:absolute;"></canvas>
                     <img id="myImg" src="">
                 </div>
                 <div class="m-top-20 col-md-6">
@@ -168,7 +171,7 @@
         </div>
 
         <!-- JS includes -->
-        <script id="objDetect" src="/static/js/image.js" data-source="myImg"  data-scoreThreshold="0.40"></script>
+        <script id="objDetect" src="/static/js/image.js" data-source="myImg" data-scoreThreshold="0.30"></script>
         <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="static/js/vendor/bootstrap.min.js"></script>
         <script src="static/js/common/boot/jquery.magnific-popup.js"></script>

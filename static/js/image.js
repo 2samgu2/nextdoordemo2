@@ -1,6 +1,6 @@
 'use strict';
 const s = document.getElementById('objDetect');
-const sourceVideo = s.getAttribute("data-source");  //the source video to use
+const sourceImg = s.getAttribute("data-source");  //the source image to use
 const scoreThreshold = s.getAttribute("data-scoreThreshold") || 0.5;
 const apiServer = s.getAttribute("data-apiServer") || window.location.origin + '/frame'; //the full TensorFlow Object Detection API server url
 
@@ -11,38 +11,23 @@ let drawCtx = drawCanvas.getContext("2d");
 
 function imgChange() {
     var file    = document.querySelector('input[type=file]').files[0];
-    var reader  = new FileReader()
-    reader.onload = function(e) {
-        
-        //var image = new Image();
-        var image = document.getElementById(sourceVideo);
-        image.height = drawCanvas.width;
-        image.width = drawCanvas.height;
-        image.src = e.target.result;
-        console.log('e.target.result', e.target.result);
-        
-        let formdata = new FormData();
-        formdata.append("image", image);
-        formdata.append("threshold", scoreThreshold);
-        $(function(){
-            $.ajax({
-                url: apiServer,
-                processData: false,
-                contentType: false,
-                data: formdata,
-                type: 'POST',
-                success: function(result){
-                    let objects = JSON.parse(result);
-    
-                   //draw the boxes
-                    drawBoxes(objects);
-                }
-            });
-        });
-    };
-    reader.readAsDataURL(file);
-     
+    var reader  = new FileReader();
+    reader.addEventListener("load", function () {
+        var image = document.getElementById(sourceImg);
+        image.src = this.result;
+        imageCtx.drawImage(image, 0, 0, image.width, image.height);
+        imageCanvas.toBlob(postFile, 'image/jpeg');
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 } 
+
+var data = document.querySelector('p#data');
+function plog(message) {
+    data.innerHTML = message + '<br><br>' + data.innerHTML;
+}
 
 function drawBoxes(objects) {
 
@@ -59,5 +44,28 @@ function drawBoxes(objects) {
         plog('Label : ' + object.class_name + ', Score : ' + Math.round(object.score * 100) + '%');
         drawCtx.fillText(object.class_name + " - " + Math.round(object.score * 100) + "%", x + 5, y + 20);
         drawCtx.strokeRect(x, y, width, height);
+    });
+}
+
+function postFile(file) {
+    console.log('postFile',file);
+    let formdata = new FormData();
+    formdata.append("image", file);
+    formdata.append("threshold", scoreThreshold);
+    
+    $(function(){
+        $.ajax({
+            url: apiServer,
+            processData: false,
+            contentType: false,
+            data: formdata,
+            type: 'POST',
+            success: function(result){
+                let objects = JSON.parse(result);
+
+               //draw the boxes
+                drawBoxes(objects);
+            }
+        });
     });
 }

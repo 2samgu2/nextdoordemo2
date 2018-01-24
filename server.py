@@ -2,6 +2,7 @@
 import object_detection_api
 import os
 import ssl
+from OpenSSL import SSL
 from PIL import Image
 from flask import Flask, request, Response
 from flask import render_template
@@ -79,5 +80,7 @@ if __name__ == '__main__':
     #app.run(debug=True, host='0.0.0.0')
 
 	# with SSL
-    ssl_context = 'adhoc'
-    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)
+    #ssl_context = 'adhoc'
+    #app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=ssl_context)
+    context = ('S:/development_environment/dev/설치파일/AWS/server-ssl/future.crt', 'S:/development_environment/dev/설치파일/AWS/server-ssl/future.key')
+    app.run(debug=True, host='0.0.0.0', port=5000, ssl_context=context)
